@@ -324,7 +324,7 @@ export default function Index() {
           <div className="grid sm:grid-cols-3 gap-4 mb-10">
             {[
               { icon: "Phone", label: "Телефон", value: "+7 (903) 461-88-56", href: "tel:+79034618856" },
-              { icon: "Mail", label: "Email", value: "anna@example.com", href: "mailto:anna@example.com" },
+              { icon: "Mail", label: "Email", value: "Shteynira@yandex.ru", href: "mailto:Shteynira@yandex.ru" },
               { icon: "MessageCircle", label: "Telegram", value: "@ShteynIra", href: "https://t.me/ShteynIra" },
             ].map((c, i) => (
               <a
@@ -348,7 +348,7 @@ export default function Index() {
           </div>
 
           <a
-            href="mailto:anna@example.com"
+            href="mailto:Shteynira@yandex.ru"
             className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-body font-medium text-base transition-all hover:opacity-90 active:scale-95 shadow-md"
             style={{ backgroundColor: "var(--terra)", color: "var(--cream)" }}
           >
