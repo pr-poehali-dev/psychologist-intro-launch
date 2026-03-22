@@ -325,7 +325,7 @@ export default function Index() {
             {[
               { icon: "Phone", label: "Телефон", value: "+7 (903) 461-88-56", href: "tel:+79034618856" },
               { icon: "Mail", label: "Email", value: "anna@example.com", href: "mailto:anna@example.com" },
-              { icon: "MessageCircle", label: "Telegram", value: "@anna_psych", href: "https://t.me/anna_psych" },
+              { icon: "MessageCircle", label: "Telegram", value: "@ShteynIra", href: "https://t.me/ShteynIra" },
             ].map((c, i) => (
               <a
                 key={i}
