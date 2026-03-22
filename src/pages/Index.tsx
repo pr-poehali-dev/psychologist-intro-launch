@@ -217,7 +217,10 @@ export default function Index() {
                 className="absolute bottom-0 left-0 right-0 px-5 py-3 font-body text-sm italic"
                 style={{ backgroundColor: "rgba(249,245,239,0.85)", color: "var(--terra)" }}
               >
-                Моя рука вам открыта
+                Моя рука открыта вам всегда,<br />
+                в ней — зерно надежды и тепло.<br />
+                Приходите, даже если вдруг беда —<br />
+                вместе мы найдём, где рассвело.
               </div>
             </div>
             <div className="grid grid-cols-2 gap-6">
