@@ -323,7 +323,7 @@ export default function Index() {
 
           <div className="grid sm:grid-cols-3 gap-4 mb-10">
             {[
-              { icon: "Phone", label: "Телефон", value: "+7 (999) 000-00-00", href: "tel:+79990000000" },
+              { icon: "Phone", label: "Телефон", value: "+7 (903) 461-88-56", href: "tel:+79034618856" },
               { icon: "Mail", label: "Email", value: "anna@example.com", href: "mailto:anna@example.com" },
               { icon: "MessageCircle", label: "Telegram", value: "@anna_psych", href: "https://t.me/anna_psych" },
             ].map((c, i) => (
