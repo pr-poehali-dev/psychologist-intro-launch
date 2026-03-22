@@ -148,7 +148,7 @@ export default function Index() {
             />
             <img
               src={PHOTO_URL}
-              alt="Анна Соколова — психолог"
+              alt="Ирина Штейн — психолог"
               className="relative z-10 w-72 h-72 md:w-96 md:h-96 object-cover blob shadow-xl"
             />
             <div
