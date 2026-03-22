@@ -108,14 +108,14 @@ export default function Index() {
               className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 animate-fade-up opacity-0-init"
               style={{ color: "var(--warm-brown)", animationDelay: "0.2s", animationFillMode: "forwards" }}
             >
-              Пространство,<br />
-              <em>где вас слышат</em>
+              Свет в конце<br />
+              <em>тоннеля — есть</em>
             </h1>
             <p
               className="font-body text-lg leading-relaxed mb-8 max-w-md animate-fade-up opacity-0-init"
               style={{ color: "var(--warm-brown)", animationDelay: "0.35s", animationFillMode: "forwards" }}
             >
-              Помогаю справляться с тревогой, трудностями в отношениях и найти опору внутри себя. Каждый человек заслуживает быть услышанным.
+              Все ответы у вас уже есть. Я только помогу найти нужный маршрут и экологично размотать любую головоломку в вашей голове.
             </p>
             <div
               className="flex flex-wrap gap-4 animate-fade-up opacity-0-init"
@@ -190,13 +190,13 @@ export default function Index() {
               className="font-body text-base leading-relaxed mb-5"
               style={{ color: "var(--warm-brown)", opacity: 0.85 }}
             >
-              Я начинающий психолог, и это значит, что я не просто учусь — я действительно вникаю в каждый случай с максимальной внимательностью и свежим взглядом.
+              Я начинающий психолог — ещё учусь, но уже обладаю достаточными знаниями и инструментами, чтобы помочь размотать любую головоломку в вашей голове.
             </p>
             <p
               className="font-body text-base leading-relaxed mb-5"
               style={{ color: "var(--warm-brown)", opacity: 0.85 }}
             >
-              Моя работа строится на уважении к вашему темпу и доверии к процессу. Я здесь не для того, чтобы давать советы — а чтобы быть рядом, пока вы сами находите ответы.
+              Я не даю готовых советов. Все ответы уже живут внутри вас — я лишь помогу найти нужный маршрут и бережно, экологично привести вас к свету в конце тоннеля.
             </p>
             <p
               className="font-body text-base leading-relaxed"
