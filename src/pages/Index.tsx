@@ -206,7 +206,21 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6">
+            <div className="relative rounded-3xl overflow-hidden shadow-lg">
+              <img
+                src="https://cdn.poehali.dev/projects/59708334-393c-4312-8070-669d4b5342e8/bucket/738fcb65-af36-435e-9a97-fac190062a72.jpeg"
+                alt="Моя рука вам открыта"
+                className="w-full h-64 object-cover"
+              />
+              <div
+                className="absolute bottom-0 left-0 right-0 px-5 py-3 font-body text-sm italic"
+                style={{ backgroundColor: "rgba(249,245,239,0.85)", color: "var(--terra)" }}
+              >
+                Моя рука вам открыта
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
             {[
               { num: "КПТ", label: "Когнитивно-поведенческая терапия" },
               { num: "50+", label: "Часов личной терапии" },
@@ -235,6 +249,7 @@ export default function Index() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
