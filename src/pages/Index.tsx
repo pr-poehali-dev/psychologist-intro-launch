@@ -66,7 +66,7 @@ export default function Index() {
           className="font-display text-xl font-semibold tracking-wide"
           style={{ color: "var(--warm-brown)" }}
         >
-          Анна Соколова
+          Ирина
         </span>
         <div
           className="hidden md:flex gap-8 font-body text-sm font-medium"
@@ -184,7 +184,7 @@ export default function Index() {
               className="font-display text-4xl md:text-5xl font-light mb-6 leading-tight"
               style={{ color: "var(--warm-brown)" }}
             >
-              Анна Соколова
+              Ирина
             </h2>
             <p
               className="font-body text-base leading-relaxed mb-5"
@@ -363,7 +363,7 @@ export default function Index() {
         className="py-8 px-6 md:px-12 text-center font-body text-sm"
         style={{ backgroundColor: "var(--warm-brown)", color: "var(--blush)" }}
       >
-        <span style={{ opacity: 0.6 }}>© 2026 Анна Соколова · Психолог</span>
+        <span style={{ opacity: 0.6 }}>© 2026 Ирина · Психолог</span>
       </footer>
     </div>
   );
