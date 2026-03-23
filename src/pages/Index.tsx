@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
+const SEND_ANKETA_URL = "https://functions.poehali.dev/3a1a023e-7da8-4842-a5aa-105d8fed3602";
+
 const PHOTO_URL =
   "https://cdn.poehali.dev/projects/59708334-393c-4312-8070-669d4b5342e8/bucket/1b5fd0f8-721c-4990-8427-62dd235ee201.jpeg";
 
@@ -54,6 +56,38 @@ export default function Index() {
   const aboutSection = useInView();
   const servicesSection = useInView();
   const contactSection = useInView();
+  const anketaSection = useInView();
+
+  const [form, setForm] = useState({ full_name: "", birth_date: "", request_text: "" });
+  const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.full_name || !form.birth_date || !form.request_text) {
+      setErrorMsg("Пожалуйста, заполните все поля");
+      return;
+    }
+    setFormState("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch(SEND_ANKETA_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setFormState("success");
+        setForm({ full_name: "", birth_date: "", request_text: "" });
+      } else {
+        setFormState("error");
+        setErrorMsg("Что-то пошло не так. Попробуйте ещё раз.");
+      }
+    } catch {
+      setFormState("error");
+      setErrorMsg("Ошибка соединения. Проверьте интернет и попробуйте снова.");
+    }
+  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--cream)" }}>
@@ -74,10 +108,11 @@ export default function Index() {
         >
           <a href="#about" className="hover:opacity-60 transition-opacity">О мне</a>
           <a href="#services" className="hover:opacity-60 transition-opacity">Услуги</a>
+          <a href="#anketa" className="hover:opacity-60 transition-opacity">Анкета</a>
           <a href="#contact" className="hover:opacity-60 transition-opacity">Контакты</a>
         </div>
         <a
-          href="#contact"
+          href="#anketa"
           className="px-5 py-2 rounded-full font-body text-sm font-medium transition-all hover:opacity-90 active:scale-95"
           style={{ backgroundColor: "var(--terra)", color: "var(--cream)" }}
         >
@@ -122,7 +157,7 @@ export default function Index() {
               style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
             >
               <a
-                href="#contact"
+                href="#anketa"
                 className="px-8 py-3 rounded-full font-body font-medium text-base transition-all hover:opacity-90 active:scale-95 shadow-md"
                 style={{ backgroundColor: "var(--terra)", color: "var(--cream)" }}
               >
@@ -312,6 +347,120 @@ export default function Index() {
           >
             Первая консультация — знакомство и оценка запроса. Стоимость и формат обсуждаются индивидуально.
           </div>
+        </div>
+      </section>
+
+      {/* ANKETA */}
+      <section id="anketa" className="py-24 px-6 md:px-12" style={{ backgroundColor: "var(--cream)" }}>
+        <div
+          ref={anketaSection.ref}
+          className={`container mx-auto max-w-xl transition-all duration-700 ${
+            anketaSection.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="text-center mb-10">
+            <p className="font-body text-sm uppercase tracking-[0.2em] mb-3" style={{ color: "var(--terra)" }}>
+              Первый шаг
+            </p>
+            <h2
+              className="font-display text-4xl md:text-5xl font-light mb-4"
+              style={{ color: "var(--warm-brown)" }}
+            >
+              Заполните анкету
+            </h2>
+            <p className="font-body text-base leading-relaxed" style={{ color: "var(--warm-brown)", opacity: 0.75 }}>
+              Расскажите немного о себе — я свяжусь с вами и мы договоримся об удобном времени.
+            </p>
+          </div>
+
+          {formState === "success" ? (
+            <div
+              className="p-10 rounded-3xl text-center"
+              style={{ backgroundColor: "var(--blush)", color: "var(--warm-brown)" }}
+            >
+              <div className="text-5xl mb-4">🌿</div>
+              <h3 className="font-display text-2xl font-medium mb-3" style={{ color: "var(--terra)" }}>
+                Анкета отправлена!
+              </h3>
+              <p className="font-body text-base leading-relaxed opacity-80">
+                Я получила вашу анкету и свяжусь с вами в течение дня. Спасибо за доверие.
+              </p>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="p-8 rounded-3xl flex flex-col gap-6"
+              style={{ backgroundColor: "var(--blush)", border: "1px solid var(--border)" }}
+            >
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Полное имя
+                </label>
+                <input
+                  type="text"
+                  placeholder="Иванова Мария Петровна"
+                  value={form.full_name}
+                  onChange={(e) => setForm({ ...form, full_name: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Дата рождения
+                </label>
+                <input
+                  type="date"
+                  value={form.birth_date}
+                  onChange={(e) => setForm({ ...form, birth_date: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  С каким запросом обращаетесь?
+                </label>
+                <textarea
+                  rows={4}
+                  placeholder="Опишите, что вас беспокоит или с чем хотите разобраться..."
+                  value={form.request_text}
+                  onChange={(e) => setForm({ ...form, request_text: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none resize-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              {errorMsg && (
+                <p className="font-body text-sm text-center" style={{ color: "var(--terra-dark)" }}>
+                  {errorMsg}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={formState === "loading"}
+                className="w-full py-4 rounded-full font-body font-medium text-base transition-all hover:opacity-90 active:scale-95 shadow-md disabled:opacity-60"
+                style={{ backgroundColor: "var(--terra)", color: "var(--cream)" }}
+              >
+                {formState === "loading" ? "Отправляем..." : "Отправить анкету"}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
