@@ -52,7 +52,7 @@ export default function AboutSection() {
               className="font-body text-base leading-relaxed mb-5"
               style={{ color: "var(--warm-brown)", opacity: 0.85 }}
             >
-              Я начинающий психолог — ещё учусь, но уже обладаю достаточными знаниями и инструментами, чтобы помочь размотать любую головоломку в вашей голове.
+              Я практикующий психолог — обладаю знаниями и инструментами, чтобы помочь размотать любую головоломку в вашей голове.
             </p>
             <p
               className="font-body text-base leading-relaxed mb-5"

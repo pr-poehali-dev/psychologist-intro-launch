@@ -52,7 +52,7 @@ export default function HeroSection() {
               className="font-body text-sm uppercase tracking-[0.2em] mb-4 animate-fade-in opacity-0-init"
               style={{ color: "var(--terra)", animationDelay: "0.1s", animationFillMode: "forwards" }}
             >
-              Психолог · Начинающий специалист
+              Психолог · Практикующий специалист
             </p>
             <h1
               className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 animate-fade-up opacity-0-init"
