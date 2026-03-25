@@ -32,11 +32,20 @@ def handler(event: dict, context) -> dict:
     birth_date = body.get('birth_date', '').strip()
     request_text = body.get('request_text', '').strip()
 
+    marital_status = body.get('marital_status', '').strip()
+    marriage_duration = body.get('marriage_duration', '').strip()
+    first_marriage = body.get('first_marriage', '').strip()
+    children = body.get('children', '').strip()
+    cohabitants = body.get('cohabitants', '').strip()
+    occupation = body.get('occupation', '').strip()
+    hobbies = body.get('hobbies', '').strip()
+    about_self = body.get('about_self', '').strip()
+
     if not full_name or not birth_date or not request_text:
         return {
             'statusCode': 400,
             'headers': {'Access-Control-Allow-Origin': '*'},
-            'body': {'error': 'Заполните все поля анкеты'}
+            'body': {'error': 'Заполните все обязательные поля анкеты'}
         }
 
     smtp_password = os.environ['SMTP_PASSWORD']
@@ -48,6 +57,32 @@ def handler(event: dict, context) -> dict:
     msg['From'] = sender_email
     msg['To'] = recipient_email
 
+    fields = [
+        ('Полное имя', full_name),
+        ('Дата рождения', birth_date),
+        ('Семейное положение', marital_status),
+        ('Как давно в браке', marriage_duration),
+        ('Первый брак', first_marriage),
+        ('Дети', children),
+        ('Проживают вместе', cohabitants),
+        ('Занятость / работа', occupation),
+        ('Хобби / увлечения', hobbies),
+        ('О себе', about_self),
+        ('Запрос к психологу', request_text),
+    ]
+
+    rows_html = ''
+    for i, (label, value) in enumerate(fields):
+        if not value:
+            continue
+        bg = ' style="background: #f9f5ef;"' if i % 2 == 0 else ''
+        v_align = ' vertical-align: top;' if label in ('О себе', 'Запрос к психологу') else ''
+        rows_html += f'''
+            <tr{bg}>
+                <td style="padding: 12px; font-weight: bold; width: 200px;{v_align}">{label}:</td>
+                <td style="padding: 12px;">{value}</td>
+            </tr>'''
+
     html_body = f"""
     <html>
     <body style="font-family: Arial, sans-serif; color: #5c3d2e; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -55,18 +90,7 @@ def handler(event: dict, context) -> dict:
             Новая анкета с сайта
         </h2>
         <table style="width: 100%; border-collapse: collapse;">
-            <tr style="background: #f9f5ef;">
-                <td style="padding: 12px; font-weight: bold; width: 180px;">Полное имя:</td>
-                <td style="padding: 12px;">{full_name}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; font-weight: bold;">Дата рождения:</td>
-                <td style="padding: 12px;">{birth_date}</td>
-            </tr>
-            <tr style="background: #f9f5ef;">
-                <td style="padding: 12px; font-weight: bold; vertical-align: top;">Запрос:</td>
-                <td style="padding: 12px;">{request_text}</td>
-            </tr>
+            {rows_html}
         </table>
         <p style="color: #8ba888; font-size: 12px; margin-top: 20px;">
             Письмо отправлено автоматически с вашего сайта.

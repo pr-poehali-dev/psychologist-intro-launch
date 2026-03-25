@@ -8,14 +8,26 @@ export default function AnketaSection() {
   const anketaSection = useInView();
   const contactSection = useInView();
 
-  const [form, setForm] = useState({ full_name: "", birth_date: "", request_text: "" });
+  const [form, setForm] = useState({
+    full_name: "",
+    birth_date: "",
+    marital_status: "",
+    marriage_duration: "",
+    first_marriage: "",
+    children: "",
+    cohabitants: "",
+    occupation: "",
+    hobbies: "",
+    about_self: "",
+    request_text: "",
+  });
   const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.full_name || !form.birth_date || !form.request_text) {
-      setErrorMsg("Пожалуйста, заполните все поля");
+      setErrorMsg("Пожалуйста, заполните обязательные поля (имя, дата рождения и запрос)");
       return;
     }
     setFormState("loading");
@@ -28,7 +40,11 @@ export default function AnketaSection() {
       });
       if (res.ok) {
         setFormState("success");
-        setForm({ full_name: "", birth_date: "", request_text: "" });
+        setForm({
+          full_name: "", birth_date: "", marital_status: "", marriage_duration: "",
+          first_marriage: "", children: "", cohabitants: "", occupation: "",
+          hobbies: "", about_self: "", request_text: "",
+        });
       } else {
         setFormState("error");
         setErrorMsg("Что-то пошло не так. Попробуйте ещё раз.");
@@ -120,7 +136,152 @@ export default function AnketaSection() {
 
               <div className="flex flex-col gap-2">
                 <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
-                  С каким запросом обращаетесь?
+                  Семейное положение
+                </label>
+                <input
+                  type="text"
+                  placeholder="Замужем / Женат / В разводе / Не замужем..."
+                  value={form.marital_status}
+                  onChange={(e) => setForm({ ...form, marital_status: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-2">
+                  <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                    Как давно в браке?
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="5 лет / не в браке"
+                    value={form.marriage_duration}
+                    onChange={(e) => setForm({ ...form, marriage_duration: e.target.value })}
+                    className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                    style={{
+                      backgroundColor: "var(--cream)",
+                      color: "var(--warm-brown)",
+                      border: "1.5px solid var(--border)",
+                    }}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                    Первый брак?
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Да / Нет / Второй"
+                    value={form.first_marriage}
+                    onChange={(e) => setForm({ ...form, first_marriage: e.target.value })}
+                    className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                    style={{
+                      backgroundColor: "var(--cream)",
+                      color: "var(--warm-brown)",
+                      border: "1.5px solid var(--border)",
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Есть ли дети? Сколько лет?
+                </label>
+                <input
+                  type="text"
+                  placeholder="Дочь — 5 лет, сын — 12 лет / Нет детей"
+                  value={form.children}
+                  onChange={(e) => setForm({ ...form, children: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Кто проживает с вами на одной территории?
+                </label>
+                <input
+                  type="text"
+                  placeholder="Муж и двое детей / Живу одна / С родителями..."
+                  value={form.cohabitants}
+                  onChange={(e) => setForm({ ...form, cohabitants: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Занятость / работа
+                </label>
+                <input
+                  type="text"
+                  placeholder="Менеджер в IT-компании / Домохозяйка / Студент..."
+                  value={form.occupation}
+                  onChange={(e) => setForm({ ...form, occupation: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Хобби / увлечения
+                </label>
+                <input
+                  type="text"
+                  placeholder="Чтение, йога, рисование..."
+                  value={form.hobbies}
+                  onChange={(e) => setForm({ ...form, hobbies: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Что ещё хотели бы рассказать о себе?
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Любая информация, которой хотите поделиться..."
+                  value={form.about_self}
+                  onChange={(e) => setForm({ ...form, about_self: e.target.value })}
+                  className="w-full px-4 py-3 rounded-2xl font-body text-base outline-none resize-none transition-all"
+                  style={{
+                    backgroundColor: "var(--cream)",
+                    color: "var(--warm-brown)",
+                    border: "1.5px solid var(--border)",
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="font-body text-sm font-medium" style={{ color: "var(--warm-brown)" }}>
+                  Что побудило вас обратиться к психологу? Чем я могу быть полезна как психолог-консультант? *
                 </label>
                 <textarea
                   rows={4}
