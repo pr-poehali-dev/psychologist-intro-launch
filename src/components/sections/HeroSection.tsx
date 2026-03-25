@@ -9,7 +9,7 @@ export default function HeroSection() {
       {/* NAV */}
       <nav
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12"
-        style={{ backgroundColor: "rgba(249,245,239,0.88)", backdropFilter: "blur(12px)" }}
+        style={{ backgroundColor: "rgba(249,245,239,0.88)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
       >
         <span
           className="font-display text-xl font-semibold tracking-wide"
